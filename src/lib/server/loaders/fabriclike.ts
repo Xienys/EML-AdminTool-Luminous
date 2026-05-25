@@ -44,7 +44,8 @@ export async function getFabricLikeGameVersions(loader: FabricLikeLoader): Promi
 }
 
 export async function getFabricLikeLoaderVersions(loader: FabricLikeLoader): Promise<string[]> {
-  const cacheKey = loader === ILoaderType.FABRIC ? 'fabric-loader-versions' : 'quilt-loader-versions'
+  // const cacheKey = loader === ILoaderType.FABRIC ? 'fabric-loader-versions' : 'quilt-loader-versions'
+  const cacheKey = 'fabric-game-versions'
 
   return getOrSet(cacheKey, async () => {
     const v = V[loader]
