@@ -5,7 +5,7 @@ import type { LoaderVersion } from '$lib/utils/types'
 import { getOrSet } from '../cache'
 import { fetchJson, getMajorVersion } from './utils'
 
-type FabricLikeLoader = typeof ILoaderType.FABRIC | typeof ILoaderType.QUILT
+type FabricLikeLoader = typeof ILoaderType.FABRIC
 
 const V = {
   [ILoaderType.FABRIC]: {
@@ -16,7 +16,8 @@ const V = {
 }
 
 export async function getFabricLikeGameVersions(loader: FabricLikeLoader): Promise<LoaderVersion[]> {
-  const cacheKey = loader === ILoaderType.FABRIC ? 'fabric-game-versions' : 'quilt-game-versions'
+  // const cacheKey = loader === ILoaderType.FABRIC ? 'fabric-game-versions' : 'quilt-game-versions'
+  const cacheKey = 'fabric-game-versions'
 
   return getOrSet(cacheKey, async () => {
     const v = V[loader]
