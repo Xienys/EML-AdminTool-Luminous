@@ -13,11 +13,6 @@ const V = {
     metaUrl: 'https://meta.fabricmc.net',
     v2: true
   },
-  [ILoaderType.QUILT]: {
-    name: 'Quilt',
-    metaUrl: 'https://meta.quiltmc.org',
-    v2: false
-  }
 }
 
 export async function getFabricLikeGameVersions(loader: FabricLikeLoader): Promise<LoaderVersion[]> {
