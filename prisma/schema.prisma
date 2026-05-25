@@ -25,7 +25,6 @@ enum LoaderType {
   FORGE
   NEOFORGE
   FABRIC
-  QUILT
   CUSTOM
 }
 
