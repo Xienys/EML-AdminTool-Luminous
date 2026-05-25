@@ -28,15 +28,13 @@ export const load = (async (event) => {
     const requestedProfileSlug = event.url.searchParams.get('profile')
     const selectedProfile = (requestedProfileSlug ? profiles.find((p) => p.slug === requestedProfileSlug) : null) ?? profiles[0]
 
-    const [files, vanilla, forge, neoforge, fabric, quilt, fabricLoaderVersions, quiltLoaderVersions, databaseLoader] = await Promise.all([
+    const [files, vanilla, forge, neoforge, fabric, fabricLoaderVersions, databaseLoader] = await Promise.all([
       getCachedFilesParsed(domain, `files-updater/${selectedProfile.slug}`),
       getVanillaVersions(),
       getForgeLikeVersions(ILoaderType.FORGE),
       getForgeLikeVersions(ILoaderType.NEOFORGE),
       getFabricLikeGameVersions(ILoaderType.FABRIC),
-      getFabricLikeGameVersions(ILoaderType.QUILT),
       getFabricLikeLoaderVersions(ILoaderType.FABRIC),
-      getFabricLikeLoaderVersions(ILoaderType.QUILT),
       db.loader.findFirst({ where: { profileId: selectedProfile.id } }).catch((err) => {
         console.error('Failed to load loader:', err)
         throw new ServerError('Failed to load loader', err, NotificationCode.DATABASE_ERROR, 500)
@@ -48,7 +46,6 @@ export const load = (async (event) => {
       [ILoaderType.FORGE]: forge,
       [ILoaderType.NEOFORGE]: neoforge,
       [ILoaderType.FABRIC]: fabric,
-      [ILoaderType.QUILT]: quilt
     }
 
     const loader: Loader = databaseLoader?.loaderVersion
@@ -63,7 +60,7 @@ export const load = (async (event) => {
           updatedAt: new Date()
         } as Loader)
 
-    return { profiles, loader, loaderList, fabricLoaderVersions, quiltLoaderVersions, files }
+    return { profiles, loader, loaderList, fabricLoaderVersions, files }
   } catch (err) {
     if (err instanceof ServerError) throw error(err.httpStatus, { message: err.code })
 
@@ -273,7 +270,7 @@ export const actions: Actions = {
         const res = await getForgeLikeFile(type, loaderVersion)
         file = res.file
         format = res.format
-      } else if (type === ILoaderType.FABRIC || type === ILoaderType.QUILT) {
+      } else if (type === ILoaderType.FABRIC) {
         checkFabricLikeLoader(type, minecraftVersion, loaderVersion)
       }
 

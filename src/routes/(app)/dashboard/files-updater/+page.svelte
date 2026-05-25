@@ -188,7 +188,6 @@
     {selectedProfile}
     loader={data.loader as unknown as Loader}
     fabricLoaderVersions={data.fabricLoaderVersions}
-    quiltLoaderVersions={data.quiltLoaderVersions}
     loaderList={data.loaderList}
   />
 {/if}
@@ -271,8 +270,6 @@
               ? 'NeoForge'
               : data.loader.type === ILoaderType.FABRIC
                 ? 'Fabric'
-                : data.loader.type === ILoaderType.QUILT
-                  ? 'Quilt'
                   : 'Vanilla'}
         </p>
       </div>
