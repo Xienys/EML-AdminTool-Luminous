@@ -24,7 +24,6 @@ export const ILoaderType = {
   FORGE: 'FORGE',
   NEOFORGE: 'NEOFORGE',
   FABRIC: 'FABRIC',
-  QUILT: 'QUILT',
   CUSTOM: 'CUSTOM'
 } as const
 
