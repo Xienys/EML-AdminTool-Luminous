@@ -33,6 +33,7 @@ services:
     environment:
       NODE_ENV: 'production'
       BODY_SIZE_LIMIT: 'Infinity'
+      ALLOWED_ORIGINS: http://localhost:8080,http://127.0.0.1:8080,http://localhost:5015,http://127.0.0.1:5015
     volumes:
       - files:/app/files
       - env:/app/env
